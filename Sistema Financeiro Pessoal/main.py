@@ -1,14 +1,14 @@
 # Importações de bibliotecas
-import ttkbootstrap as ttk  # Biblioteca visual baseada no Tkinter com temas modernos
-from ttkbootstrap.constants import *  # Constantes úteis como CENTER, W, etc
-import tkinter as tk  # Biblioteca base para interface gráfica
-from datetime import datetime  # Para manipulação de datas
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg  # Embutir gráficos matplotlib no Tkinter
-import matplotlib.pyplot as plt  # Biblioteca de gráficos
+import ttkbootstrap as ttk  
+from ttkbootstrap.constants import *  
+import tkinter as tk  
+from datetime import datetime  
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg  
+import matplotlib.pyplot as plt  
 
 # Importações de módulos internos
-from models import Entrada, Saida  # Classes que representam modelos de dados (Herança aplicada aqui)
-from database import BancoDados  # Classe de acesso ao banco de dados (Encapsulamento e Abstração aqui)
+from models import Entrada, Saida  
+from database import BancoDados  
 
 
 db = BancoDados() 
