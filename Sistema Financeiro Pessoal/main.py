@@ -10,13 +10,12 @@ import matplotlib.pyplot as plt  # Biblioteca de gráficos
 from models import Entrada, Saida  # Classes que representam modelos de dados (Herança aplicada aqui)
 from database import BancoDados  # Classe de acesso ao banco de dados (Encapsulamento e Abstração aqui)
 
-# -------------------- INSTÂNCIA DO BANCO --------------------
-db = BancoDados()  # Instancia a classe de banco de dados (objeto responsável pelas transações)
 
+db = BancoDados() 
 # -------------------- JANELA PRINCIPAL --------------------
-app = ttk.Window(themename="flatly")  # Cria a janela principal com tema "flatly"
-app.title("💰 Dashboard Financeiro")  # Título da janela
-app.state("zoomed")  # Maximiza a janela automaticamente
+app = ttk.Window(themename="flatly")  
+app.title("💰 Dashboard Financeiro")  
+app.state("zoomed")  
 
 # -------------------- FONTES --------------------
 default_font = ("Segoe UI", 11)
@@ -42,11 +41,10 @@ def atualizar_resumo():
     label_saldo.config(text=f"Saldo: R$ {saldo:.2f}", foreground="green" if saldo >= 0 else "red")
 
 def adicionar_transacao():
-    # Cria e adiciona uma transação no banco de dados
     try:
         valor = float(valor_var.get())
     except ValueError:
-        return  # Sai da função se o valor for inválido
+        return  
 
     # Herança aplicada: Entrada e Saida são subclasses de Transacao
     transacao = Entrada(valor, categoria_var.get(), data_var.get(), descricao_var.get()) if tipo_var.get() == "Entrada" else Saida(valor, categoria_var.get(), data_var.get(), descricao_var.get())
@@ -61,12 +59,12 @@ def adicionar_transacao():
     atualizar_resumo()
 
 def mostrar_grafico_entradas():
-    # Mostra gráfico de pizza com as entradas por categoria
+    # Mostra gráfico de pizza entradas
     entradas = db.obter_valores_por_categoria("entrada")
     if not entradas:
         return
 
-    popup = tk.Toplevel(app)  # Janela popup
+    popup = tk.Toplevel(app)  
     popup.title("📈 Gráfico de Entradas por Categoria")
     fig, ax = plt.subplots(figsize=(5, 5))
     labels, valores = zip(*entradas)
@@ -77,7 +75,7 @@ def mostrar_grafico_entradas():
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
 def mostrar_grafico_saidas():
-    # Mostra gráfico de pizza com as saídas por categoria
+    # Mostra gráfico de pizza com as saídas 
     saidas = db.obter_valores_por_categoria("saida")
     if not saidas:
         return
@@ -170,5 +168,5 @@ ttk.Button(botoes_graficos, text="📊 Evolução do Saldo", command=mostrar_evo
         bootstyle="primary-outline", width=35).grid(row=0, column=2, padx=10, pady=5)
 
 # -------------------- INICIAR A APLICAÇÃO --------------------
-atualizar_resumo()  # Inicializa os valores de entrada/saída/saldo
+atualizar_resumo()  
 app.mainloop()  # Inicia o loop principal da interface
